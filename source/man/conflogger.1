@@ -1,0 +1,36 @@
+.TH "conflogger" "1" "13. Jan. 2017" "Frank Sommer" "conflogger"
+
+.SH NAME
+conflogger
+.SH SYNOPSIS
+.B conflogger
+.RI FILE
+.br
+
+.SH DESCRIPTION
+.B conflogger
+conflogger writes information about changes of [config]-file to a logfile.
+
+Conflogger is a console tool that calls an editor.
+
+After closing the editor, conflogger asks for information about the change and writes it to a log-file. The log-file and editor is freely selectable, the settings are save at the configuration file.
+
+conflogger will look for a configuration file in the users home directory located at ~/. conflogger.conf. At the first start conflogger create this configuration file. 
+
+.SH USAGE
+conflogger FILE
+
+.SH EXAMPLE
+$ conflogger /etc/example/config.com
+
+.SH ERRORS
+conflogger response the system-error-message.
+
+.SH BUGS
+.PP
+Probably there are some, feel free to fix it and publish a new version.
+
+.SH AUTHORS
+.nf
+Idea and first edition by Frank Sommer [mailto:frank.sommer.fs@gmail.com] <frank.sommer.fs at gmail dot com>
+
