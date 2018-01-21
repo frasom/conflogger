@@ -1,7 +1,7 @@
 /* conflogger
    Log change at configuration
 
-   Copyright (C) 2017  Frank Sommer
+   Copyright (C) 2018  Frank Sommer
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define VERSION	"0.4"
+#define VERSION	"0.5"
 #define CONFIGFILE ".conflogger.conf"
 #define MAXBUF 1024
 #define DELIM "="

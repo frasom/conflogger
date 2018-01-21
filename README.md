@@ -50,6 +50,11 @@ $ cat configInfo |grep FILE
     .
     .
 
-<a class="github-button" href="https://github.com/frasom/conflogger/archive/master.zip" data-style="mega" aria-label="Download frasom/conflogger on GitHub">Download</a>
+## Installation
 
+### Debian
+
+Download 'conflogger.deb' and install with dpkg:
+
+sudo dpkg -i /PATH-TO-PACKAGE/conflogger.deb
 

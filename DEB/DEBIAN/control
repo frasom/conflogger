@@ -1,0 +1,12 @@
+Package: conflogger
+Version: 0.3.0-0
+Section: misc/admin
+Priority: extra
+Architecture: amd64
+Depends:
+Installed-Size: 10
+Maintainer: Frank Sommer <frank.sommer.fs@gmail.com>
+Homepage: https://github.com/frasom/conflogger
+Description: Configfile changes Logger
+ conflogger writes information about changes of [config]-file to a logfile
+

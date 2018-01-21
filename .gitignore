@@ -1,4 +1,10 @@
-# Ignore 
-files.gitignore
+# Ignore files
+.hgignore
+.git
+.gitignore
+
+*~
+*.o
+
 # Ignore directory
-DEB
+

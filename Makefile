@@ -5,12 +5,17 @@ CC=gcc
 CFLAGS=-Wall -std=c99
 
 SRCDIR = ./source
-EXECDIR = ./bin
-MANDIR = ./man
+EXECDIR = ./DEB/bin
+MANDIR = ./DEB/usr/share/man/man1
 OBJ = *.o
 BAK = *~
 
-all:  exec man
+all:  deb exec man
+
+deb: conflogger
+	strip $(EXECDIR)/conflogger
+	strip $(EXECDIR)/sqliteDBinfo
+	dpkg -b ./DEB conflogger.deb
 
 exec: conflogger
 	mkdir -p $(EXECDIR)

@@ -41,23 +41,23 @@ Die Änderungshistorie einer einzelnen Konfigurationsdatei kann mit 'grep' ausge
 Pro Änderung kann nur eine Zeile mit max. 1024 Zeichen eingegeben werden.
 Die conflogger Logdatei wird beim ersten Programmlauf automatisch angelegt.
 
-### Systemanforderungen
+## Systemanforderungen
 conflogger wurde auf einem ubuntu 16.04 System entwickelt, sollte aber auf jedem Unixoiden System (Unix, Linux, macOS) laufen.
 
-### Installation
+## Installation
 
-## Debian-Paketsystem
+### Debian-Paketsystem
 
-Download des Instalationspakets von Github: [conflogger.deb](https://github.com/frasom/conflogger)
+Download des Instalationspakets und installation mit dpkg: 
 
-## Andere Linux-Distributionen
+sudo dpkg -i /PFAD-ZUM-PAKET/conflogger.deb  
+
+### Andere Linux-Distributionen
  
-Das Installationsscript installiert conflogger im Verzeichnis /bin und benötigt sudo rechte.  
-Alternativ kann die Programmdatei 'conflogger' auch manuell im Homeverzeichnis abgespeichert werden.
+confloger aus dem Verzeichnis DEB/bin ims Verzeichnis /bin kopieren.  
+Alternativ kann die Programmdatei 'conflogger' auch im Homeverzeichnis abgespeichert werden.
 
-    $ cp QUELLZEICHNIS/bin_xx/conflogger ~/ZIELVERZEICHNIS
-* QUELLVERZEICHNIS und ZIELVERZEICHNIS müssen individuell angepasst werden.
-* bin_xx muss je nach  Prozessorarchitektur 32/64 Bit angepasst werden.
+    $ cp DEB/bin/conflogger ~/ZIELVERZEICHNIS
 
 #### Programme kompiliert und installiert
  Sollte das Programm auf dem Zielsystem nicht laufen kann es mit make und gcc kompiliert werden. Eventuell muss des Makefile angepasst oder conflogger manuell kompiliert werden.
@@ -66,9 +66,7 @@ Alternativ kann die Programmdatei 'conflogger' auch manuell im Homeverzeichnis a
 ### Dateiliste
 | Datei Verzeichnis  | Info |
 |--------|------:|
-| bin_32/ | conflogger 32 Bit _Linux_ |
-| bin_64/ | conflogger 64 Bit _Linux_ |
-| install.sh |Installationsscript _Linux_ |
+| 
+| DEB | Installationspaket 64 Bit _Debian_ |
 | Makefile | Makefile |
-| man/ | Hilfedatei _Linux_ |
 | source/ | source-Dateien |
