@@ -14,7 +14,6 @@ all:  deb exec man
 
 deb: conflogger
 	strip $(EXECDIR)/conflogger
-	strip $(EXECDIR)/sqliteDBinfo
 	dpkg -b ./DEB conflogger.deb
 
 exec: conflogger
