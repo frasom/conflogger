@@ -1,10 +1,10 @@
 # Ignore files
 .hgignore
-.git
 .gitignore
 
 *~
 *.o
 
 # Ignore directory
-
+PPA
+.hg

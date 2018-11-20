@@ -1,5 +1,8 @@
 # Configfile changes Logger
 
+The Documenting of configuration changes is an unpopular task.
+conflogger helps with automatic documentation.
+
 ----
 
 conflogger writes information about changes of [config]-file to a logfile
@@ -20,7 +23,15 @@ conflogger will look for a configuration file in the users home directory locate
     LOGFILE=configInfo
     EDITOR=gedit
 
+## Shared common LOGFILE (*new Vers. 0.6*)
 
+To use a shared common LOGFILE exemple "/var/log/conflogger.log"
+Generate as SU the LOGFILE with the writing authorisation
+
+Example config file: “.conflogger.conf”
+
+    LOGFILE=/var/log/conflogger.log
+    EDITOR=gedit
 
 ## Example program sequence:
 
@@ -57,4 +68,3 @@ $ cat configInfo |grep FILE
 Download 'conflogger.deb' and install with dpkg:
 
 sudo dpkg -i /PATH-TO-PACKAGE/conflogger.deb
-

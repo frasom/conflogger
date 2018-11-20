@@ -20,14 +20,14 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
+#include <unistd.h>
 
-#define VERSION	"0.5"
+#define VERSION	"0.6"
 #define CONFIGFILE ".conflogger.conf"
 #define MAXBUF 1024
 #define DELIM "="
-#define SET_LOGFILE "configInfo"
+#define SET_LOGFILE "conflogger.log"
 #define SET_EDITOR "vi"
-
 
 struct config
 {
@@ -39,14 +39,14 @@ struct config get_config(char *configfile)
 {
 		struct config configstruct;
 
-        FILE *file = fopen (configfile, "r");                                                         /* open configuration file */
+        FILE *file = fopen (configfile, "r");                                           /* open configuration file */
 
         if (file != NULL)
         {
                 char line[MAXBUF];
                 int i = 0;
 
-                while(fgets(line, sizeof(line), file) != NULL)                                        /* read configuration file */
+                while(fgets(line, sizeof(line), file) != NULL)                          /* read configuration file */
                 {
                         char *cfline;
                         cfline = strstr((char *)line,DELIM);
@@ -62,7 +62,7 @@ struct config get_config(char *configfile)
                 fclose(file);
         }
         else {
-			FILE *datei = fopen (configfile, "w");                                        /* create configuration file */
+			FILE *datei = fopen (configfile, "w");                                               /* create configuration file */
 				if (datei == NULL)
 				{
 					printf("Error create configuration file: %s\n",configfile);
@@ -77,9 +77,7 @@ struct config get_config(char *configfile)
 
 }
 
-
 int ChangeInfo ();
-
 
 int main(int argc, char *argv[])
 {
@@ -89,21 +87,19 @@ int main(int argc, char *argv[])
 	char logfile[255];
 	char *env_home = getenv("HOME");
 
-
-	sprintf(conffile, "%s/%s",env_home,CONFIGFILE);                                               /* set path + configuration_file name  */
+	sprintf(conffile, "%s/%s",env_home,CONFIGFILE);                                        /* set path + configuration_file name  */
 
 	struct config configstruct;
-    configstruct = get_config(conffile);                                                              /* load configuration */
+    configstruct = get_config(conffile);                                                 /* load configuration */
 
-
-	if (argc < 2) {                                                                               /*  missing parameter */
+	if (argc < 2) {                                                                        /*  missing parameter */
 		printf(" \n");
 		printf("Usage: %s FILE\n", argv[0]);
 		printf(" \n");
 		printf("Logfile ==  %s",configstruct.LOGFILE);
 		printf("Editor  ==  %s",configstruct.EDITOR);
 		printf("conflogger Version %s\n", VERSION);
-		printf("Copyright (C) 2017  Frank Sommer\n");
+		printf("Copyright (C) 2018  Frank Sommer\n");
 		printf("This program comes with ABSOLUTELY NO WARRANTY.\n");
 	}
 	else {
@@ -117,7 +113,7 @@ int main(int argc, char *argv[])
 
 		id = system (command);                                                                /*  call system to edit file */
 		if(id == 0) {
-			id = ChangeInfo (argv[1], logfile);                                           /*  config info schreiben   */
+			id = ChangeInfo (argv[1], logfile);                                                 /*  config info write       */
 		}
 		else {
 		printf ("CommandError: %d.\n",id);
@@ -133,9 +129,15 @@ int ChangeInfo (char *dat, char *file)
 	char string[1024];
 	char log_file[255];
 	char *temp;
-	char *env_home = getenv("HOME");                                                              /* get HOME for log file  */
+  char gethostname();
+	/*char *env_home = getenv("HOME") get HOME for log file  no use in Vers 0.6*/
+  char *p=getenv("USER");                                                                       /* get username           */
+  char hostname[1024];
 
-	sprintf(log_file, "%s/%s",env_home,file);                                                     /* set path + ChangeInfo-file name  */
+  if(p==NULL) return EXIT_FAILURE;                                                              /* error username ?       */
+  if (gethostname(hostname, 1024) == -1) return EXIT_FAILURE;                                   /* get hostename          */
+
+	sprintf(log_file, "%s",file);                                                                 /* set ChangeInfo-file name  */
 
 	datei = fopen (log_file, "a");                                                                /* open log-filen   */
 
@@ -154,8 +156,8 @@ int ChangeInfo (char *dat, char *file)
 	temp = ( asctime( timeinfo ) );
 	temp[ strlen( temp ) - 1 ] = 0x0;                                                             /* drop Linefeed */
 
-	fprintf (datei, "%s", temp );
-	fprintf (datei, " - %s - %s", dat, string);
+	fprintf (datei, "%s ", temp );                                                                /* write date time     */
+	fprintf (datei, "%s %s: %s - %s", hostname, p, dat, string);                                  /* write hostename user file and info */
 	fclose (datei);
 	return 0;
 }

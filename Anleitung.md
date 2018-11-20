@@ -8,6 +8,16 @@ Die conflogger Konfigurationsdatei wird beim ersten Programmstart automatisch an
     LOGFILE=configInfo
     EDITOR=gedit
 
+## Zentrale Logdatei
+
+Es kann auch eine Systemweite Logdatei genutzt werden z.B. "/var/log/conflogger.log"
+Dazu muss mit SU rechten eine entsprechende Datei angelegt und mit schreibrechten versehen werden.
+
+Beispiel Konfigurationsdatei: “.conflogger.conf”
+
+    LOGFILE=/var/log/conflogger.log
+    EDITOR=gedit
+
 ## Beispielprogrammablauf:
 
     $ conflogger /etc/example/config.com
@@ -24,7 +34,6 @@ Die conflogger Konfigurationsdatei wird beim ersten Programmstart automatisch an
 
 ## Anzeigen der Änderungshistorie
      $ cat configInfo
-     - conflogger LogDatei
      Sat Jan  7 17:42:24 2017 - /etc/hosts - Änderung der Drucker Adresse Zeile 6
      Thu Jan 12 18:57:31 2017 - /etc/fstab - neues NFS Verzeichnis 'test' auf Server
      Thu Jan 12 18:58:52 2017 - /etc/mysql/my.cnf - änderung Datenbank Verzeichnis
@@ -33,7 +42,6 @@ Die conflogger Konfigurationsdatei wird beim ersten Programmstart automatisch an
 Die Änderungshistorie einer einzelnen Konfigurationsdatei kann mit 'grep' ausgegeben werden.
 
     $ cat configInfo | grep fstab
-    - conflogger LogDatei
     Thu Jan 12 18:57:31 2017 - /etc/fstab - neues NFS Verzeichnis 'test' auf Server
     Sat Jan 14 17:20:49 2017 - /etc/fstab - keine Änderung
 
@@ -42,18 +50,18 @@ Pro Änderung kann nur eine Zeile mit max. 1024 Zeichen eingegeben werden.
 Die conflogger Logdatei wird beim ersten Programmlauf automatisch angelegt.
 
 ## Systemanforderungen
-conflogger wurde auf einem ubuntu 16.04 System entwickelt, sollte aber auf jedem Unixoiden System (Unix, Linux, macOS) laufen.
+conflogger wurde auf einem ubuntu 18.04 System entwickelt, sollte aber auf jedem Unixoiden System (Unix, Linux, macOS) laufen.
 
 ## Installation
 
 ### Debian-Paketsystem
 
-Download des Instalationspakets und installation mit dpkg: 
+Download des Instalationspakets und installation mit dpkg:
 
 sudo dpkg -i /PFAD-ZUM-PAKET/conflogger.deb  
 
 ### Andere Linux-Distributionen
- 
+
 confloger aus dem Verzeichnis DEB/bin ims Verzeichnis /bin kopieren.  
 Alternativ kann die Programmdatei 'conflogger' auch im Homeverzeichnis abgespeichert werden.
 
@@ -66,7 +74,7 @@ Alternativ kann die Programmdatei 'conflogger' auch im Homeverzeichnis abgespeic
 ### Dateiliste
 | Datei Verzeichnis  | Info |
 |--------|------:|
-| 
+|
 | DEB | Installationspaket 64 Bit _Debian_ |
 | Makefile | Makefile |
 | source/ | source-Dateien |
