@@ -22,7 +22,7 @@
 #include <time.h>
 #include <unistd.h>
 
-#define VERSION	"0.6"
+#define VERSION	"0.6.1"
 #define CONFIGFILE ".conflogger.conf"
 #define MAXBUF 1024
 #define DELIM "="
@@ -90,9 +90,9 @@ int main(int argc, char *argv[])
 	sprintf(conffile, "%s/%s",env_home,CONFIGFILE);                                        /* set path + configuration_file name  */
 
 	struct config configstruct;
-    configstruct = get_config(conffile);                                                 /* load configuration */
+    configstruct = get_config(conffile);                                                   /* load configuration */
 
-	if (argc < 2) {                                                                        /*  missing parameter */
+	 if (argc < 2 ||!strcmp(argv[1], "--help")) {                                          /*  missing parameter or help me*/
 		printf(" \n");
 		printf("Usage: %s FILE\n", argv[0]);
 		printf(" \n");

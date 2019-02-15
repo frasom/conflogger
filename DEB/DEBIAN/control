@@ -1,5 +1,5 @@
 Package: conflogger
-Version: 0.3.0-0
+Version: 0.6.1-0
 Section: misc/admin
 Priority: extra
 Architecture: amd64

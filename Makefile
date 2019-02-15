@@ -21,7 +21,7 @@ exec: conflogger
 
 conflogger: $(SRCDIR)/conflog.c
 	$(CC) -Wall -std=c99 $(SRCDIR)/conflog.c -o $(EXECDIR)/conflogger
-	
+
 man: conflogger.man
 	mkdir -p $(MANDIR)
 
