@@ -22,7 +22,7 @@
 #include <time.h>
 #include <unistd.h>
 
-#define VERSION	"0.6.1"
+#define VERSION	"0.6.1b"
 #define CONFIGFILE ".conflogger.conf"
 #define MAXBUF 1024
 #define DELIM "="
@@ -62,7 +62,7 @@ struct config get_config(char *configfile)
                 fclose(file);
         }
         else {
-			FILE *datei = fopen (configfile, "w");                                               /* create configuration file */
+			FILE *datei = fopen (configfile, "w");                                      /* create configuration file */
 				if (datei == NULL)
 				{
 					printf("Error create configuration file: %s\n",configfile);
@@ -87,12 +87,12 @@ int main(int argc, char *argv[])
 	char logfile[255];
 	char *env_home = getenv("HOME");
 
-	sprintf(conffile, "%s/%s",env_home,CONFIGFILE);                                        /* set path + configuration_file name  */
+	sprintf(conffile, "%s/%s",env_home,CONFIGFILE);                                     /* set path + configuration_file name  */
 
 	struct config configstruct;
-    configstruct = get_config(conffile);                                                   /* load configuration */
+    configstruct = get_config(conffile);                                                /* load configuration */
 
-	 if (argc < 2 ||!strcmp(argv[1], "--help")) {                                          /*  missing parameter or help me*/
+	 if (argc < 2 ||!strcmp(argv[1], "--help")) {                                       /*  missing parameter or help me*/
 		printf(" \n");
 		printf("Usage: %s FILE\n", argv[0]);
 		printf(" \n");
@@ -103,17 +103,17 @@ int main(int argc, char *argv[])
 		printf("This program comes with ABSOLUTELY NO WARRANTY.\n");
 	}
 	else {
-		strcpy(command, configstruct.EDITOR);                                                 /*  command part1    */
-		command[ strlen( command ) - 1 ] = 0x0;                                               /*  drop Linefeed */
-		strcat(command, " ");                                                                 /*  add space to command  */
-		strcat(command, argv[1]);                                                             /*  add filename to command  */
+		strcpy(command, configstruct.EDITOR);                                           /*  command part1    */
+		command[ strlen( command ) - 1 ] = 0x0;                                         /*  drop Linefeed */
+		strcat(command, " ");                                                           /*  add space to command  */
+		strcat(command, argv[1]);                                                       /*  add filename to command  */
 
-		strcpy(logfile, configstruct.LOGFILE);                                                /*  logfile name   */
-		logfile[ strlen( logfile ) - 1 ] = 0x0;                                               /*  drop Linefeed */
+		strcpy(logfile, configstruct.LOGFILE);                                          /*  logfile name   */
+		logfile[ strlen( logfile ) - 1 ] = 0x0;                                         /*  drop Linefeed */
 
-		id = system (command);                                                                /*  call system to edit file */
+		id = system (command);                                                          /*  call system to edit file */
 		if(id == 0) {
-			id = ChangeInfo (argv[1], logfile);                                                 /*  config info write       */
+			id = ChangeInfo (argv[1], logfile);                                         /*  config info write       */
 		}
 		else {
 		printf ("CommandError: %d.\n",id);
@@ -130,16 +130,15 @@ int ChangeInfo (char *dat, char *file)
 	char log_file[255];
 	char *temp;
   char gethostname();
-	/*char *env_home = getenv("HOME") get HOME for log file  no use in Vers 0.6*/
-  char *p=getenv("USER");                                                                       /* get username           */
+  char *p=getenv("USER");                                                               /* get username           */
   char hostname[1024];
 
-  if(p==NULL) return EXIT_FAILURE;                                                              /* error username ?       */
-  if (gethostname(hostname, 1024) == -1) return EXIT_FAILURE;                                   /* get hostename          */
+  if(p==NULL) return EXIT_FAILURE;                                                      /* error username ?       */
+  if (gethostname(hostname, 1024) == -1) return EXIT_FAILURE;                           /* get hostename          */
 
-	sprintf(log_file, "%s",file);                                                                 /* set ChangeInfo-file name  */
+	sprintf(log_file, "%s",file);                                                       /* set ChangeInfo-file name  */
 
-	datei = fopen (log_file, "a");                                                                /* open log-filen   */
+	datei = fopen (log_file, "a");                                                      /* open log-filen   */
 
 	if (datei == NULL)
 	{
@@ -149,15 +148,15 @@ int ChangeInfo (char *dat, char *file)
 	printf("Change Info: ");
 	fgets(string, 1020, stdin);
 
-	time_t rawtime;                                                                               /*  get Time */
+	time_t rawtime;                                                                     /*  get Time */
 	struct tm * timeinfo;
 	time ( &rawtime );
 	timeinfo = localtime ( &rawtime );
 	temp = ( asctime( timeinfo ) );
-	temp[ strlen( temp ) - 1 ] = 0x0;                                                             /* drop Linefeed */
+	temp[ strlen( temp ) - 1 ] = 0x0;                                                   /* drop Linefeed */
 
-	fprintf (datei, "%s ", temp );                                                                /* write date time     */
-	fprintf (datei, "%s %s: %s - %s", hostname, p, dat, string);                                  /* write hostename user file and info */
+	fprintf (datei, "%s ", temp );                                                      /* write date time     */
+	fprintf (datei, "%s %s: %s - %s", hostname, p, dat, string);                        /* write hostename user file and info */
 	fclose (datei);
 	return 0;
 }
