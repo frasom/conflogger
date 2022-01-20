@@ -1,7 +1,7 @@
 /* conflogger
-   Log change at configuration
+   Log for changes to configuration files 
 
-   Copyright (C) 2018  Frank Sommer
+   Copyright (C) 2022  Frank Sommer
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -20,9 +20,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
-#include <unistd.h>
+#include <unistd.h>                                                                     /* for gethostname  */
 
-#define VERSION	"0.6.1b"
+#define VERSION	"0.6.1c"
 #define CONFIGFILE ".conflogger.conf"
 #define MAXBUF 1024
 #define DELIM "="
@@ -129,9 +129,9 @@ int ChangeInfo (char *dat, char *file)
 	char string[1024];
 	char log_file[255];
 	char *temp;
-  char gethostname();
-  char *p=getenv("USER");                                                               /* get username           */
-  char hostname[1024];
+    char gethostname();
+    char *p=getenv("USER");                                                             /* get username           */
+    char hostname[1024];
 
   if(p==NULL) return EXIT_FAILURE;                                                      /* error username ?       */
   if (gethostname(hostname, 1024) == -1) return EXIT_FAILURE;                           /* get hostename          */
@@ -145,7 +145,7 @@ int ChangeInfo (char *dat, char *file)
 		printf("Error open Logfile %s\n",log_file);
 		return 1;
 	}
-	printf("Change Info: ");
+	printf("Change Info: ");                                                            /* ask for the reason for the change  */
 	fgets(string, 1020, stdin);
 
 	time_t rawtime;                                                                     /*  get Time */
@@ -153,10 +153,10 @@ int ChangeInfo (char *dat, char *file)
 	time ( &rawtime );
 	timeinfo = localtime ( &rawtime );
 	temp = ( asctime( timeinfo ) );
-	temp[ strlen( temp ) - 1 ] = 0x0;                                                   /* drop Linefeed */
-
-	fprintf (datei, "%s ", temp );                                                      /* write date time     */
-	fprintf (datei, "%s %s: %s - %s", hostname, p, dat, string);                        /* write hostename user file and info */
+	temp[ strlen( temp ) - 1 ] = 0x0;                                                   /* drop Linefeed                           */
+                                                                                        /* write the data to the file              */
+	fprintf (datei, "%s ", temp );                                                      /* write date time                         */
+	fprintf (datei, "%s %s: %s - %s", hostname, p, dat, string);                        /* write hostename user filenme changeinfo */
 	fclose (datei);
 	return 0;
 }
