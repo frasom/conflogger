@@ -1,5 +1,10 @@
 # Configfile changes Logger
 
+![Static Badge](https://img.shields.io/badge/OS-Linux-lightgrey)
+![GitHub top language](https://img.shields.io/github/languages/top/frasom/conflogger)
+![GitHub License](https://img.shields.io/github/license/frasom/conflogger)
+![GitHub repo size](https://img.shields.io/github/repo-size/frasom/conflogger)
+
 The Documenting of configuration changes is an unpopular task.
 conflogger helps with automatic documentation.
 
